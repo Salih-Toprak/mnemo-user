@@ -1,0 +1,17 @@
+services:
+  container:
+    build: .
+    container_name: mnemo-container-${USER_ID:-default}
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    networks:
+      - mnemo-net
+    restart: on-failure
+
+networks:
+  mnemo-net:
+    external: true
+    name: mnemo-net
