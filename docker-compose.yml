@@ -1,9 +1,9 @@
 services:
   container:
     build: .
-    container_name: mnemo-container-${USER_ID:-default}
+    container_name: mnemo-chatbot
     ports:
-      - "${APP_PORT:-8000}:8000"
+      - "8000:8000"
     env_file: .env
     volumes:
       - ./data:/app/data

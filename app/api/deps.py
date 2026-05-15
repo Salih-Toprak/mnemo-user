@@ -13,7 +13,7 @@ from app.query.pipeline import QueryPipeline
 logger = logging.getLogger(__name__)
 
 
-async def require_master(x_master_key: str = Header(default="")) -> None:
+async def require_master(x_master_key: str = Header(default="", alias="X-Master-Key" )) -> None:
     s = app_config.settings
     if s.master_api_key and x_master_key != s.master_api_key:
         raise HTTPException(status_code=403, detail="Invalid master key")

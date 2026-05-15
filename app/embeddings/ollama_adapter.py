@@ -123,3 +123,24 @@ class OllamaEmbeddingAdapter(EmbeddingAdapter):
 
     async def aclose(self) -> None:
         await self._client.aclose()
+
+    def embed_query(self, text: str) -> list[float]:
+        """
+        Sync wrapper required by rag-wiki / LangChain embedding interface.
+        Uses asyncio.run() which works correctly in any thread context.
+        """
+        import asyncio
+        try:
+            return asyncio.run(self.embed_one(text))
+        except Exception as e:
+            raise EmbeddingError(str(e), self.backend_name) from e
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        """
+        Sync wrapper required by rag-wiki / LangChain embedding interface.
+        """
+        import asyncio
+        try:
+            return asyncio.run(self.embed_batch(texts))
+        except Exception as e:
+            raise EmbeddingError(str(e), self.backend_name) from e
