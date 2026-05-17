@@ -1,4 +1,4 @@
-# Shared adapter — keep in sync with mnemo-master/app/vectordb/
+# Shared adapter — keep in sync with belleq-master/app/vectordb/
 """Singleton factory for the configured VectorDBAdapter."""
 
 from __future__ import annotations

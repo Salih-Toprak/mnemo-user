@@ -27,7 +27,7 @@ def build_mcp_server(pipeline: QueryPipeline, settings: "Settings") -> FastMCP:
     @mcp.tool()
     async def query_knowledge_base(query: str) -> str:
         """
-        Retrieve relevant document chunks from the Mnemo knowledge base.
+        Retrieve relevant document chunks from the Belleq knowledge base.
 
         Search through your organization's ingested documents
         (Slack messages, Notion pages, uploaded files) and return

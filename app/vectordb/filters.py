@@ -1,4 +1,4 @@
-# Shared adapter — keep in sync with mnemo-master/app/vectordb/
+# Shared adapter — keep in sync with belleq-master/app/vectordb/
 """Normalized metadata filters shared across vector DB adapters."""
 
 from __future__ import annotations

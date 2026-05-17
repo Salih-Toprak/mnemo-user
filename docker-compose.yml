@@ -1,17 +1,17 @@
 services:
   container:
     build: .
-    container_name: mnemo-user
+    container_name: belleq-user
     ports:
       - "8000:8000"
     env_file: .env
     volumes:
       - ./data:/app/data
     networks:
-      - mnemo-net
+      - belleq-net
     restart: on-failure
 
 networks:
-  mnemo-net:
+  belleq-net:
     external: true
-    name: mnemo-net
+    name: belleq-net

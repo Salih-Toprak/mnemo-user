@@ -1,4 +1,4 @@
-# Shared adapter — keep in sync with mnemo-master/app/vectordb/
+# Shared adapter — keep in sync with belleq-master/app/vectordb/
 
 from app.vectordb.base import VectorDBAdapter, VectorDBError
 from app.vectordb.factory import get_vector_db_adapter

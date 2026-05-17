@@ -36,7 +36,7 @@ async def lifespan(app: FastAPI):
     )
     state._startup_time = time.monotonic()
     logger.info(
-        "Starting Mnemo Container: user_id=%s type=%s",
+        "Starting Belleq Container: user_id=%s type=%s",
         settings.user_id,
         settings.container_type,
     )
@@ -122,7 +122,7 @@ async def lifespan(app: FastAPI):
         )
 
     logger.info(
-        "Mnemo Container ready: user_id=%s port=%d",
+        "Belleq Container ready: user_id=%s port=%d",
         settings.user_id,
         settings.app_port,
     )
@@ -136,16 +136,16 @@ async def lifespan(app: FastAPI):
             await emb.aclose()
         except Exception:
             logger.debug("embedder_aclose_failed", exc_info=True)
-    logger.info("Mnemo Container shut down: user_id=%s", settings.user_id)
+    logger.info("Belleq Container shut down: user_id=%s", settings.user_id)
 
 
 app = FastAPI(
-    title="Mnemo Container",
+    title="Belleq Container",
     description="""
-    Per-user knowledge lifecycle container for the Mnemo platform.
+    Per-user knowledge lifecycle container for the Belleq platform.
 
     Two API surfaces:
-    - `/internal/*` — called by the Mnemo master API (dashboard control)
+    - `/internal/*` — called by the Belleq master API (dashboard control)
     - `/query` — called by end users via API key or MCP
 
     Authentication:

@@ -1,4 +1,4 @@
-# Shared adapter — keep in sync with mnemo-master/app/vectordb/
+# Shared adapter — keep in sync with belleq-master/app/vectordb/
 """Vector database adapter contract and errors."""
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-# Shared adapter — keep in sync with mnemo-master/app/embeddings/
+# Shared adapter — keep in sync with belleq-master/app/embeddings/
 """OpenAI embeddings API (async).
 
 Model output sizes (reference):

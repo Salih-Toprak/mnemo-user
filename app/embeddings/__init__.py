@@ -1,4 +1,4 @@
-# Shared adapter — keep in sync with mnemo-master/app/embeddings/
+# Shared adapter — keep in sync with belleq-master/app/embeddings/
 
 from app.embeddings.base import EmbeddingAdapter, EmbeddingError
 from app.embeddings.factory import get_embedding_adapter

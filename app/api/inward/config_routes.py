@@ -47,7 +47,7 @@ def _public_config_dict(s: Any) -> dict[str, Any]:
         "rag_wiki_decay_interval_hours": s.rag_wiki_decay_interval_hours,
         "rag_wiki_top_k": s.rag_wiki_top_k,
         "mcp_enabled": s.mcp_enabled,
-        "mcp_server_name": s.mcp_server_name or f"mnemo-{s.user_id}",
+        "mcp_server_name": s.mcp_server_name or f"belleq-{s.user_id}",
         "data_dir": s.data_dir,
         "app_port": s.app_port,
     }

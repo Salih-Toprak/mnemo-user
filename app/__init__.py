@@ -1,1 +1,1 @@
-"""Mnemo kullanıcı konteyneri uygulama paketi."""
+"""Belleq kullanıcı konteyneri uygulama paketi."""

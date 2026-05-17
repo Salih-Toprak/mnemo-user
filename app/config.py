@@ -23,7 +23,7 @@ RUNTIME_CONFIG_KEYS = frozenset(
 
 
 class Settings(BaseSettings):
-    """Mnemo kullanıcı konteyneri yapılandırması."""
+    """Belleq kullanıcı konteyneri yapılandırması."""
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -86,7 +86,7 @@ class Settings(BaseSettings):
 
     @property
     def db_path(self) -> str:
-        return f"{self.data_dir}/{self.user_id}/mnemo.db"
+        return f"{self.data_dir}/{self.user_id}/belleq.db"
 
     @property
     def db_url(self) -> str:
@@ -98,7 +98,7 @@ class Settings(BaseSettings):
 
     @property
     def resolved_mcp_server_name(self) -> str:
-        return self.mcp_server_name or f"mnemo-{self.user_id}"
+        return self.mcp_server_name or f"belleq-{self.user_id}"
 
     @model_validator(mode="after")
     def _normalize_user_id(self) -> Settings:

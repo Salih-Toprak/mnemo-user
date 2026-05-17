@@ -1,6 +1,6 @@
-# mnemo-user
+# belleq-user
 
-Per-user **retrieval-as-a-service** container for the [Mnemo](https://github.com/sstprk) platform. It runs the **rag-wiki** lifecycle system and returns relevant document chunks to whoever calls it. It has no LLM, no answer generation, no use-case-specific logic.
+Per-user **retrieval-as-a-service** container for the [Belleq](https://github.com/sstprk) platform. It runs the **rag-wiki** lifecycle system and returns relevant document chunks to whoever calls it. It has no LLM, no answer generation, no use-case-specific logic.
 
 Each deployment runs **one** `USER_ID`. All rag-wiki lifecycle state is stored under `/app/data/{USER_ID}/` on disk (SQLite + JSON overrides) and survives restarts.
 
@@ -31,7 +31,7 @@ OpenAPI: **`/docs`**, **`/redoc`**.
 
 ## Quick start
 
-1. Create a Docker network (once), e.g. from **mnemo-master**: `docker network create mnemo-net`
+1. Create a Docker network (once), e.g. from **belleq-master**: `docker network create belleq-net`
 2. `cp .env.example .env` and set at least **`USER_ID`**
 3. `docker compose up --build`
 4. Call **`POST /query`** with a JSON body and optional `X-Api-Key` if `USER_API_KEY` is set
@@ -87,7 +87,7 @@ Add to **Claude Desktop** config (`claude_desktop_config.json`):
 ```json
 {
   "mcpServers": {
-    "mnemo": {
+    "belleq": {
       "url": "http://your-container-host:8000/mcp/sse"
     }
   }
@@ -121,7 +121,7 @@ MCP shares the **same** `QueryPipeline` instance as the HTTP API (no duplicate p
 | `MASTER_API_KEY` | No | Master `X-Master-Key` (empty = open) |
 | `USER_API_KEY` | No | User `X-Api-Key` (empty = open) |
 | `MCP_ENABLED` | No | Mount MCP sub-app |
-| `MCP_SERVER_NAME` | No | Defaults to `mnemo-{USER_ID}` |
+| `MCP_SERVER_NAME` | No | Defaults to `belleq-{USER_ID}` |
 | `APP_PORT` | No | Host port in compose mapping (container listens on **8000**) |
 | `LOG_LEVEL` | No | Python logging level |
 
@@ -131,7 +131,7 @@ MCP shares the **same** `QueryPipeline` instance as the HTTP API (no duplicate p
 
 - **Volume**: mount host dir to **`/app/data`**
 - **Files**:
-  - `{DATA_DIR}/{USER_ID}/mnemo.db` — rag-wiki `SQLiteStateStore` + `GlobalDocStore`
+  - `{DATA_DIR}/{USER_ID}/belleq.db` — rag-wiki `SQLiteStateStore` + `GlobalDocStore`
   - `{DATA_DIR}/{USER_ID}/runtime_config.json` — PATCHable runtime overrides
 
 If the volume is **lost**, per-user lifecycle + registry rows are gone; **vectors in Qdrant/Pinecone** remain until explicitly deleted.
@@ -149,15 +149,15 @@ services:
     env_file: .env.user001
     ports: ["8100:8000"]
     volumes: ["./data-user001:/app/data"]
-    networks: [mnemo-net]
+    networks: [belleq-net]
   user002:
     build: .
     env_file: .env.user002
     ports: ["8200:8000"]
     volumes: ["./data-user002:/app/data"]
-    networks: [mnemo-net]
+    networks: [belleq-net]
 networks:
-  mnemo-net: { external: true, name: mnemo-net }
+  belleq-net: { external: true, name: belleq-net }
 ```
 
 ---
@@ -187,10 +187,10 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ## Repository layout
 
-- `app/vectordb/` and `app/embeddings/` — duplicated from **mnemo-master** adapters (see file headers); keep in sync manually.
+- `app/vectordb/` and `app/embeddings/` — duplicated from **belleq-master** adapters (see file headers); keep in sync manually.
 - `app/lifecycle/` — rag-wiki stores, retriever, APScheduler decay job
 - `app/query/` — retrieval pipeline (chunks only, no LLM)
 - `app/mcp/` — FastMCP SSE server
 - `app/api/` — inward + outward routers
 
-Master repo path (local): `../mnemo-master`.
+Master repo path (local): `../belleq-master`.
